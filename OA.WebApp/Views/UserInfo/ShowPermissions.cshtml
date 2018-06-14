@@ -1,0 +1,211 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowPermissions</title>
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 14px;
+            line-height: 180%;
+            padding-top: 20px;
+        }
+        /*总控制，可忽略此行*/
+        table tr:first-child {
+            background: #0066CC;
+            color: #fff;
+            font-weight: bold;
+        }
+        /*第一行标题蓝色背景*/
+        table {
+            border-top: 1pt solid #C1DAD7;
+            border-left: 1pt solid #C1DAD7;
+            margin: 0 auto;
+        }
+
+        td {
+            padding: 5px 10px;
+            text-align: center;
+            border-right: 1pt solid #C1DAD7;
+            border-bottom: 1pt solid #C1DAD7;
+        }
+
+        tr:nth-of-type(odd) {
+            background: #c6f9f7
+        }
+        /* odd 标识奇数行，even标识偶数行 */
+        tr:hover {
+            background: #E0F0F0;
+        }
+        /*鼠标悬停后表格背景颜色*/
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            bindRadioClickEvent();//绑定单选按钮事件
+            bindeEasyuibutton();//绑定清除按钮事件
+        });
+        //更改用户的权限
+        function bindRadioClickEvent()
+        {
+            $(".action").click(function () {
+            var userid =@ViewBag.UserInfo.ID;
+            var actionid = $(this).attr("id").split('-')[1];
+            var value = $(this).val();
+            $.post("/UserInfo/ChangeAction", { "userid": userid, "actionid": actionid, "radiovalue": value }, function (data) {
+                if (data == "成功修改权限")
+                {
+                    $.messager.show({
+                        title: '提示',
+                        msg: data,
+                        timeout: 5000,
+                        showType: 'slide'
+                    });
+                }
+                else
+                {
+                    $.messager.show({
+                        title: '提示',
+                        msg: '未知错误',
+                        timeout: 5000,
+                        showType: 'slide'
+                    });
+                }
+            });
+            });
+
+        }
+        function bindeEasyuibutton() {
+            $('.easyui-linkbutton').click(function () {
+            var userid =@ViewBag.UserInfo.ID;
+            var actionid = $(this).attr("id").split('-')[1];
+            $("#" + "allow-" + actionid).removeAttr("checked");
+            $("#" + "forbid-" + actionid).removeAttr("checked");
+            $.post("/UserInfo/CleanAction", { "userid": userid, "actionid": actionid }, function (data) {
+                if (data == "noexsit")
+                {
+                    $.messager.show({
+                        title: '提示',
+                        msg: '用户已无该权限',
+                        timeout: 5000,
+                        showType: 'slide'
+                    });
+                }
+                else if (data=="ok")
+                {
+                    //清除选中的radio按钮
+               
+                    $.messager.show({
+                        title: '提示',
+                        msg: '清除权限成功',
+                        timeout: 5000,
+                        showType: 'slide'
+                    });
+                }
+                else
+                {
+                    $.messager.show({
+                        title: '提示',
+                        msg: '清除权限失败',
+                        timeout: 5000,
+                        showType: 'slide'
+                    });
+                }
+            });
+            });
+        }
+    </script>
+</head>
+<body>
+    <div>
+        正在为用户<span style="font:14px;color:red;font-weight:bold">@ViewBag.userInfo.UName</span>分配权限
+        <br/>
+        <table width='600' border='0' cellspacing='0' cellpadding='0' align='center'>
+            <tr>
+                <td>
+                    编号
+                </td>
+                <td>
+                    权限名称
+                </td>
+                <td>
+                    URL
+                </td>
+                <td>
+                    HTTPMETHOD
+                </td>
+                <td>
+                    操作
+                </td>
+            </tr>
+            @{
+                foreach (var permission in ViewBag.permissions)
+                {
+                    var allow = "allow";
+                    var forbid = "forbid";
+                    <tr>
+                        <td>
+                            @permission.ID
+                        </td>
+                        <td>
+                            @permission.ActionInfoName
+                        </td>
+                        <td>
+                            @permission.Url
+                        </td>
+                        <td>
+                            @permission.HttpMethod
+                        </td>
+                        <td>
+                            @{
+                                var IsExt = false;
+                                foreach (var userAction in @ViewBag.userAction)
+                                {
+                                    if (userAction.ActionInfoID == @permission.ID)
+                                    {
+                                        IsExt = true;
+                                        if (userAction.IsPass)
+                                        {
+                                            <label for="@allow-@permission.ID">允许</label>
+                                            <input type="radio" id="@allow-@permission.ID" value="true" name="@permission.ID" class="action" checked="checked"/>
+                                            <label for="@forbid-@permission.ID">禁止</label>
+                                            <input type="radio" id="@forbid-@permission.ID" value="false" name="@permission.ID" class="action"/>
+                                        }
+                                        else
+                                        {
+                                            <label for="@allow-@permission.ID">允许</label>
+                                            <input type="radio" id="@allow-@permission.ID" name="@permission.ID" class="action" value="true"/>
+                                            <label for="@forbid-@permission.ID">禁止</label>
+                                            <input type="radio" id="@forbid-@permission.ID" value="false" name="@permission.ID" class="action" checked="checked"/>
+                                        }
+                                        break;
+                                    }
+                                }
+                                if (!IsExt)
+                                {
+                                    <label for="@allow-@permission.ID">允许</label>
+                                        <input type="radio" id="@allow-@permission.ID" name="@permission.ID" class="action" value="true"/>
+                                        <label for="@forbid-@permission.ID">禁止</label>
+                                        <input type="radio" id="@forbid-@permission.ID" name="@permission.ID" class="action"  value="false"/>
+                                }
+                                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" id="easy-@permission.ID">清除</a>
+                            }
+                           
+                        </td>
+                    </tr>
+                }
+
+            }
+            
+        </table>
+</div>
+</body>
+</html>

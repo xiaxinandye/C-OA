@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HomePae</title>
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script type="text/javascript">
+        $(function()
+        {
+                bindClickEvent();
+        });
+        function bindClickEvent() {
+            $('.detailLink').click(function () {
+                var title = $(this).text();
+                var url = $(this).attr("url");
+                var isExt = $('#tt').tabs('exists', title);
+                if (isExt)
+                {
+                    $('#tt').tabs('select', title);
+                    return;
+                }
+                $('#tt').tabs('add', {
+                    title: title,
+                    content: showContent(url),
+                    closable: true
+                });
+            });
+        }
+        function showContent(url) {
+            var content = '<iframe src="' + url + '" width="100%" height="100%" frameborder="0"></iframe>';
+            return content;
+        }
+    </script>
+</head>
+<body class="easyui-layout">
+    <div data-options="region:'north',border:false" style="height:75px;background:#B3DFDA;padding:0px;overflow:hidden;background-image:url('/Content/Images/bg3.png');">
+
+
+        <img src="~/Content/Images/logo.jpg" style="float:left" width="90" height="90" />
+        <span style="color:blue;font-size:20px;margin-top:25px;float:right;margin-right:650px;font-family:KaiTi">OA办公系统</span>
+    </div>
+    <div data-options="region:'west',split:true,title:'West'" style="width:150px;padding:3px;">
+        <div class="easyui-accordion" style="width:auto;height:auto;">
+            <div title="用户管理" data-options="iconCls:'icon-ok'" style="overflow:auto;padding:5px;">
+                <a href="javascript:void(0)" url="/UserInfo/Index" class="detailLink">用户管理</a>
+            </div>
+            <div title="角色管理" data-options="iconCls:'icon-help'" style="padding:5px;">
+                <a href="javascript:void(0)" url="/RoleInfo/Index" class="detailLink">角色管理</a>
+            </div>
+
+        </div>
+    </div>
+    <div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;padding:10px;">south region</div>
+    <div data-options="region:'center',title:'Center'">
+        <div id="tt" class="easyui-tabs" data-options="tools:'#tab-tools'" style="width:700px;height:250px;" fit="true">
+        </div>
+    </div>
+</body>
+</html>
+

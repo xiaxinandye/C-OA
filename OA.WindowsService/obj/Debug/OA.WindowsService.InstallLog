@@ -1,0 +1,48 @@
+﻿正在安装程序集“G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe”。
+受影响的参数是:
+   logtoconsole = 
+   logfile = G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.InstallLog
+   assemblypath = G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe
+尝试在 G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe 程序集中查找安装程序时发生异常。
+System.Reflection.ReflectionTypeLoadException: 无法加载一个或多个请求的类型。有关更多信息，请检索 LoaderExceptions 属性。
+正在中止安装 G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe。
+正在回滚程序集“G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe”。
+受影响的参数是:
+   logtoconsole = 
+   logfile = G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.InstallLog
+   assemblypath = G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe
+尝试在 G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe 程序集中查找安装程序时发生异常。
+System.Reflection.ReflectionTypeLoadException: 无法加载一个或多个请求的类型。有关更多信息，请检索 LoaderExceptions 属性。
+正在中止安装 G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe。
+正在安装程序集“G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe”。
+受影响的参数是:
+   logtoconsole = 
+   logfile = G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.InstallLog
+   assemblypath = G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe
+尝试在 G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe 程序集中查找安装程序时发生异常。
+System.Reflection.ReflectionTypeLoadException: 无法加载一个或多个请求的类型。有关更多信息，请检索 LoaderExceptions 属性。
+正在中止安装 G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe。
+正在回滚程序集“G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe”。
+受影响的参数是:
+   logtoconsole = 
+   logfile = G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.InstallLog
+   assemblypath = G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe
+尝试在 G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe 程序集中查找安装程序时发生异常。
+System.Reflection.ReflectionTypeLoadException: 无法加载一个或多个请求的类型。有关更多信息，请检索 LoaderExceptions 属性。
+正在中止安装 G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe。
+正在安装程序集“G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe”。
+受影响的参数是:
+   logtoconsole = 
+   logfile = G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.InstallLog
+   assemblypath = G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe
+尝试在 G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe 程序集中查找安装程序时发生异常。
+System.Reflection.ReflectionTypeLoadException: 无法加载一个或多个请求的类型。有关更多信息，请检索 LoaderExceptions 属性。
+正在中止安装 G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe。
+正在回滚程序集“G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe”。
+受影响的参数是:
+   logtoconsole = 
+   logfile = G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.InstallLog
+   assemblypath = G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe
+尝试在 G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe 程序集中查找安装程序时发生异常。
+System.Reflection.ReflectionTypeLoadException: 无法加载一个或多个请求的类型。有关更多信息，请检索 LoaderExceptions 属性。
+正在中止安装 G:\C#NET\OA\OA.WindowsService\obj\Debug\OA.WindowsService.exe。

@@ -1,0 +1,80 @@
+﻿@model OA.Model.ActionInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加权限</title>
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @* 表单验证错误样式 *@
+    <style type="text/css">
+        label.error {
+            color: red;
+            font-family: '楷体'
+        }
+    </style>
+    <script type="text/javascript">
+
+        function submitAddForm() {
+            validateForm($("#addActionInfoForm"));//验证表单
+            $("#addActionInfoForm").submit();//提交表单
+               
+        }
+        //校验表单
+        function validateForm(form) {
+            form.validate({
+                rules: {
+                    ActionInfoName: "required",
+                },
+                messages: {
+                    ActionInfoName: "请输入权限名称",
+                }
+            });
+
+        }
+        function afterAddActionInfo(data) {
+            //子窗体调用父窗体中的方法。
+            window.parent.afterAdd(data);
+        }
+    </script>
+</head>
+<body>
+    <div>
+        @using (Ajax.BeginForm("AddActionInfo", "ActionInfo", new { }, new AjaxOptions { OnSuccess = "afterAddActionInfo" }, new { id = "addActionInfoForm" }))
+        {
+            <table>
+                <tr><td>权限名称</td><td><input type="text" name="ActionInfoName" id="txtActionInfoName" /></td></tr>
+                <tr><td>备注</td><td><input type="text" name="Remark" id="txtRemark" /></td></tr>
+                <tr><td>排序</td><td><input type="text" name="Sort" id="txtSort" /></td></tr>
+                <tr><td>请求类型</td><td><input type="text" name="HttpMethod" id="txtHttpMethod" /></td></tr>
+                <tr><td>图标地址</td><td><input type="text" name="MenuIcon" id="txtMenuIcon" /></td></tr>
+                <tr><td>URL</td><td><input type="text" name="Url" id="txtUrl" /></td></tr>
+                <tr><td>请求控制器</td><td><input type="text" name="ControllerName" id="txtControllerName" /></td></tr>
+                <tr><td>请求方法</td><td><input type="text" name="ActionMethodName" id="txtActionInfoMethodName" /></td></tr>
+                <tr>
+                    <td>权限种类</td>
+                    <td>
+                        <select id="sect" name="ActionTypeEnum">
+                            <option value="0">
+                                非菜单权限
+                            </option>
+                            <option value="1">菜单权限</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        }
+
+    </div>
+    <div>
+
+    </div>
+</body>
+</html>

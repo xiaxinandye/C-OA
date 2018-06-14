@@ -1,0 +1,329 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/themes/default/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/easyui-lang-zh_CN.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @* 表单验证错误样式 *@
+    <style type="text/css">
+        label.error {
+            color: red;
+            font-family: '楷体'
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(function () {
+            loadData();
+        });
+        function loadData()
+        {
+            $('#tt').datagrid({
+                url: '/ActionInfo/GetActionInfo',
+                title: '权限数据表格',
+                width: 900,
+                height: 400,
+                fitColumns: true,//列自适应
+                nowrap: false,
+                idField: 'ID',//主键列的列名
+                loadMsg: '正在加载权限列表的信息',
+                pagination: true,//是否分页
+                singleSelect: false,//是否单行选择
+                pageSize: 10,//页大小，一页多少条数据
+                pageNumber: 1,//当前页，默认的
+                pageList: [1, 5, 10],
+                queryParams: {},//往后台传递参数
+                columns: [[//c.RoleName, c.RolePass, c.Email, c.RegTime
+                    { field: 'ck', checkbox: true, align: 'left'},
+                    { field: 'ID', title: '编号'},
+                    { field: 'ActionInfoName', title: '权限名称'},
+                    { field: 'Url', title: 'URL'},
+                    { field: 'ControllerName', title: '请求控制器'},
+                    { field: 'ActionInfoMethodName', title: '请求方法'},
+                    { field: 'ActionTypeEnum', title: '权限类型', width: 80,},
+                    { field: 'HttpMethod', title: '请求类型'},
+                    { field: 'MenuIcon', title: '图标地址'},
+                    { field: 'Sort', title: '排序'},
+                    { field: 'Remark', title: '备注'},
+                    {
+                        field: 'SubTime', title: '时间', align: 'right',width:80,
+                        formatter: function (value, row, index) {
+                            return getDateTime(ConvertJSONDateToJSDate(value));
+                        }
+                    }
+                ]],
+                toolbar: [{
+                    id: 'btnDelete',
+                    text: '删除',
+                    iconCls: 'icon-remove',
+                    handler: function () {
+                        deleteInfo();
+                    }
+
+                },
+                    {
+                        id: 'btnAdd',
+                        text: '添加',
+                        iconCls: 'icon-add',
+                        handler: function () {
+                            addInfo();
+                        }
+
+                    }
+                    , {
+                        id: 'btnEdit',
+                        text: '编辑',
+                        iconCls: 'icon-edit',
+                        handler: function()
+                        {
+                            editInfo();
+                        }
+                    }
+                ]
+
+
+            });
+        }
+        //yyyy-MM-dd HH:mm:SS
+        function getDateTime(date) {
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hh = date.getHours();
+            var mm = date.getMinutes();
+            var ss = date.getSeconds();
+            return year + "-" + month + "-" + day /*+ " " + hh + ":" + mm + ":" + ss*/;
+        }
+        //调用的是这个方法
+        function ConvertJSONDateToJSDate(jsondate) {
+            var date = new Date(parseInt(jsondate.replace("/Date(", "").replace(")/", ""), 10));
+            return date;
+        }
+        //判断用户是否选择了要修改的一行数据,并返回选中行的Id
+        function LimitOneRow() {
+            var rows = $('#tt').datagrid('getSelections');//获取选中的行
+            if (rows.length < 1) {
+                $.messager.alert("提示", "请重新选择数据行", "error");
+                return;
+            }
+            if (rows.length > 1) {
+                $.messager.alert("提示", "只能选中一行数据，请勿选择多行！", "error");
+                return;
+            }
+            return rows[0].ID;
+        }
+        //删除数据
+        function deleteInfo()
+        {
+            var rows = $('#tt').datagrid('getSelections');//获取选中的行
+            if (!rows || rows.length == 0) {
+                $.messager.alert("提醒", "请选择要删除的记录",
+                    "error");
+                return;
+
+            }
+
+            $.messager.confirm("提示", "确定要删除？", function (r) {
+                if (r)
+                {
+                    //获取要删除记录的ID值
+                    var rowsLength = rows.length;
+                    var strId = "";
+                    for (var i = 0; i < rowsLength; i++) {
+                        strId = strId + rows[i].ID + ',';
+                    }
+                    //去掉最后一个逗号
+                    strId = strId.substr(0, strId.length - 1);
+                    //将要删除的Id发送到服务端
+                    $.post("/ActionInfo/DeleteActionInfo", { "strId": strId }, function (data) {
+                        if (data == "ok")
+                        {
+                            $("#tt").datagrid('reload');//加载表格但不会跳转到第一页
+
+
+                            //清除上次操作的历史记录
+                            $("#tt").datagrid('clearSelections');
+                        }
+                        else
+                        {
+                            $.messager.alert("提醒", "删除记录失败！", "error");
+                        }
+                    });
+                }
+            })
+
+        }
+        //添加数据
+        function addInfo()
+        {
+            //给iframe指定url地址
+            $("#addFrame").attr("src", "/ActionInfo/ShowAddInfo");
+            $("#addDiv").css("display", "block");
+            $('#addDiv').dialog({
+                title: '添加权限数据',
+                width: 400,
+                height: 200,
+                collapsible: true,
+                maximizable: true,
+                resizable: true,
+                modal: true,
+                buttons: [{
+                    text: 'Ok',
+                    iconCls: 'icon-ok',
+                    handler: function () {
+                        //提交表单
+                        //调用子窗口的方法.
+                        var childWindow = $("#addFrame")[0].contentWindow;//表示获取了嵌入在iframe中的子窗体的window对象。
+                        childWindow.submitAddForm();//调用子窗体中的方法，完成表单的提交。
+                    }
+                }, {
+                    text: 'Cancel',
+                    handler: function () {
+                        $('#addDiv').dialog('close');
+                    }
+                }]
+            });
+        }
+        //完成添加后调用该方法
+        function afterAdd(data)
+        {
+            if (data == "ok") {
+                $('#addDiv').dialog('close');
+                $('#tt').datagrid('reload');//加载表格不会跳到第一页
+            }
+        }
+        //校验表单
+        function CheckForm(form)
+        {
+            form.validate({
+                rules: {
+                    ActionInfoName: "required",
+                },
+                messages: {
+                    ActionInfoName: "请输入权限名称",
+                }
+            });
+
+        }
+        //编辑数据
+        function editInfo()
+        {
+            var id = LimitOneRow();
+            if (id == null) {
+                return false;
+            };
+            $.post("/ActionInfo/ShowEditInfo", { "Id": id }, function (data) {
+                if (data == "no")
+                {
+                    $.messager.alert('警告', '查无此权限，请重试');
+                    return;
+                }   
+                $("#txtActionInfoName").val(data.ActionInfoName);    
+                $("#txtRemark").val(data.Remark);
+                $("#txtSort").val(data.Sort);
+                $("#txtSubTime").val(data.SubTime);
+                $("#txtDelFlag").val(data.DelFlag);
+                $("#txtId").val(data.ID);
+                $("#txtHttpMethod").val(data.HttpMethod);
+                $("#txtMenuIcon").val(data.MenuIcon);
+                $("#txtUrl").val(data.Url);
+                $("#txtControllerName").val(data.ControllerName);
+                $("#txtActionInfoMethodName").val(data.ActionMethodName);
+                $("#sect").val(data.ActionTypeEnum);//根据val的值设置option的选中
+            });
+            $("#editDiv").dialog(
+                {
+                    closed: false
+                }
+            );
+        }
+        //更新以后调用该方法
+        function afterEdit(data)
+        {
+            if (data=="ok")
+            {
+                $("#editDiv").dialog('close');
+                $("#tt").datagrid('reload');
+            }
+            else
+            {
+                $.messager.alert("提示", "更新失败", "error");
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div>
+        <table id="tt" style="width:700px;" title="标题，可以使用代码进行初始化，也可以使用这种属性的方式" iconcls="icon-edit"></table>
+    </div>
+    <!----添加表单-->
+    <div style="display:none" id="addDiv">
+        <iframe id="addFrame" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
+    <!----修改表单-->
+    <div id="editDiv" class="easyui-dialog" title="编辑角色数据" style="width:400px;height:200px;padding:10px;"
+         data-options="
+				iconCls: 'icon-edit',
+                modal:true,
+                closed:true,
+				toolbar: [{
+					text:'Edit',
+					iconCls:'icon-edit',
+					handler:function(){
+
+					}
+				}
+				],
+				buttons: [{
+					text:'Ok',
+					iconCls:'icon-ok',
+					handler:function(){
+                       //校验表单
+                        CheckForm($('#editForm'));
+						$('#editForm').submit();//提交表单
+					}
+				},{
+					text:'Cancel',
+					handler:function(){
+						$('#editDiv').dialog('close')
+					}
+				}]
+			">
+        @using (Ajax.BeginForm("EditActionInfo", "ActionInfo", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterEdit" }, new { id = "editForm", name = "editForm" }))
+        {
+            <input type="hidden" name="ID" id="txtId" />
+            <input type="hidden" name="SubTime" id="txtSubTime" />
+            <input type="hidden" name="DelFlag" id="txtDelFlag" />
+            <input type="hidden" name="IconWidth" id="txtIconWidth" />
+            <input type="hidden" name="IconHeight" id="IconHeight" />
+            <table>
+                <tr><td>权限名称</td><td><input type="text" name="ActionInfoName" id="txtActionInfoName" /></td></tr>
+                <tr><td>备注</td><td><input type="text" name="Remark" id="txtRemark" /></td></tr>
+                <tr><td>排序</td><td><input type="text" name="Sort" id="txtSort" /></td></tr>
+                <tr><td>请求类型</td><td><input type="text" name="HttpMethod" id="txtHttpMethod" /></td></tr>
+                <tr><td>图标地址</td><td><input type="text" name="MenuIcon" id="txtMenuIcon" /></td></tr>
+                <tr><td>URL</td><td><input type="text" name="Url" id="txtUrl" /></td></tr>
+                <tr><td>请求控制器</td><td><input type="text" name="ControllerName" id="txtControllerName" /></td></tr>
+                <tr><td>请求方法</td><td><input type="text" name="ActionMethodName" id="txtActionInfoMethodName" /></td></tr>
+                <tr><td>权限种类</td><td><select id="sect" name="ActionTypeEnum"><option value="0" >
+                     非菜单权限
+                     </option><option value="1">菜单权限</option></select></td></tr>
+            </table>
+        }
+    </div>
+    
+</body>
+</html>

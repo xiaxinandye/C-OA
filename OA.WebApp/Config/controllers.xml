@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  <description>An  example that demonstrates simple IoC features.</description>
+  <!--object的name可以自定义，property中的属性name不能自定义-->
+  <object name="" type="OA.WebApp.Controllers.UserInfoController,OA.WebApp" singleton="false">
+    <property name="UserInfoService" ref="UserInfoService"></property>
+    <property name="R_UserInfo_ActionInfoService" ref="R_UserInfo_ActionInfoService"></property>
+    <property name="ActionInfoService" ref="ActionInfoService"></property>
+    <property name="RoleInfoService" ref="RoleInfoService"></property>
+  </object>
+  
+  <object name="" type="OA.WebApp.Controllers.LoginController,OA.WebApp" singleton="false">
+    <property name="UserInfoService" ref="UserInfoService"></property>
+  </object>
+  <object name="" type="OA.WebApp.Controllers.SearchWordsController,OA.WebApp" singleton="false">
+    <property name="BooksService" ref="BooksService"></property>
+    <property name="T_SearchLogsService" ref="T_SearchLogsService"></property>
+  <property name="T_SearchLogStasticsService" ref="T_SearchLogStasticsService"></property>
+  </object>
+  
+  <object name="" type="OA.WebApp.Controllers.HomeController,OA.WebApp" singleton="false">
+    <property name="UserInfoService" ref="UserInfoService"></property>
+  </object>
+ <object name="" type="OA.WebApp.Controllers.ActionInfoController,OA.WebApp" singleton="false">
+    <property name="ActionInfoService" ref="ActionInfoService"></property>
+  </object>
+  <object name="" type="OA.WebApp.Controllers.RoleInfoController,OA.WebApp" singleton="false">
+    <property name="RoleInfoService" ref="RoleInfoService"></property>
+    <property name="ActionInfoService" ref="ActionInfoService"></property>
+  </object>
+</objects>

@@ -1,0 +1,90 @@
+﻿
+@{
+    Layout = null;
+}
+@using OA.WebApp.Models;
+@using OA.Model;
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="/Content/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/assets/css/ui-lightness/jquery-ui-1.8.2.custom.css" rel="stylesheet" />
+    <link href="/Content/assets/css/default.css" rel="stylesheet" />
+    <script type="text/javascript" src="/Content/assets/js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="/Content/assets/js/jquery-ui-1.8.2.custom.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#txtKeyword").autocomplete({
+                source: "/SearchWords/GetMatchWords",
+                select: function (event, ui) {
+                    $("#txtKeyword").val(ui.item.value);
+                    $("#mainForm").submit();
+                }//鼠标点击重新发出搜索请求
+            });
+            $("#txtKeyword").focus();
+        });
+    </script>
+
+</head>
+<body>
+    <div>
+
+        <form method="get" action="/SearchWords/Search" id="mainForm">
+            <div id="searchArea" class="operate">
+                <img id="imgLogo" alt="logo" src="/Content/assets/images/logo.jpg" class="logo" />
+
+                <br />
+                @*<input type="submit" name="btnCreate" value="CreateIndex" />*@
+                <br />
+                <input type="text" name="txtSearch" class="keywords" id="txtKeyword"/>
+                <input type="submit" name="btnSearch" value="搜一搜" class="btn btn-info search" />
+            </div>
+        </form>
+
+        <div id="contentArea" class="content">
+            <div id="hotkeyArea" class="hotkeys">
+                <!-- 搜索热词 -->
+                <span class="hottip">一周搜索热词：</span>
+                <ul id="hotKeywords">
+                    @{ 
+                        if(ViewData["hotKeywords"]!=null)
+                        {
+                            foreach (var item in (List<T_SearchLogStastics>)ViewData["hotKeywords"])
+                            {
+                                <li>
+                                   <span style="color:blue">@item.Word</span>  
+                                </li>
+                            }
+                        }
+                    }
+                </ul>
+            </div>
+            <!-- 搜索结果 -->
+            <ul id="searchResults">
+                @{
+                    if (ViewData["ViewModelContent"] != null)
+                    {
+                        foreach (var item in (List<ViewModelContent>)ViewData["ViewModelContent"])
+                        {
+
+                            <li>
+                                @MvcHtmlString.Create(item.Title)
+                            </li>
+                            <li>
+                                @MvcHtmlString.Create(item.Content)
+                            </li>
+
+
+                        }
+                    }
+                }
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+</html>

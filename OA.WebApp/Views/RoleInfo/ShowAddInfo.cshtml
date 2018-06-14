@@ -1,0 +1,67 @@
+﻿@model OA.Model.RoleInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>添加角色</title>
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @* 表单验证错误样式 *@
+    <style type="text/css">
+        label.error {
+            color: red;
+            font-family: '楷体'
+        }
+    </style>
+    <script type="text/javascript">
+      
+        function submitAddForm() {
+            validateForm($("#addRoleForm"));//验证表单
+            $("#addRoleForm").submit();//提交表单
+        }
+        //校验表单
+        function validateForm(form) {
+            form.validate({
+                rules: {
+                    RoleName: "required",
+                    Remark: "required",
+                    Sort: "required"
+                },
+                messages: {
+                    RoleName: "请输入角色名",
+                    Remark: "请输入备注",
+                    Sort: "请输入排序标准"
+                }
+            });
+
+        }
+        function afterAddRole(data) {
+            //子窗体调用父窗体中的方法。
+            window.parent.afterAdd(data);
+        }
+    </script>
+</head>
+<body>
+    <div> 
+        @using (Ajax.BeginForm("AddRoleInfo", "RoleInfo", new { }, new AjaxOptions { OnSuccess = "afterAddRole" }, new { id = "addRoleForm" }))
+        {
+            <table>
+                <tr><td>角色名</td><td><input type="text" name="RoleName" id="txtRName" /></td></tr>
+                <tr><td>备注</td><td><input type="text" name="Remark" id="txtRemark" /></td></tr>
+                <tr><td>排序</td><td><input type="text" name="Sort" id="txtSort" /></td></tr>
+            </table>
+        }
+  
+    </div>
+    <div>
+       
+    </div>
+</body>
+</html>

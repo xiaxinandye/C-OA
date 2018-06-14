@@ -1,0 +1,15 @@
+G:\C#NET\OA\OA.Model\bin\Debug\OA.Model.dll.config
+G:\C#NET\OA\OA.Model\bin\Debug\OA.Model.dll
+G:\C#NET\OA\OA.Model\bin\Debug\OA.Model.pdb
+G:\C#NET\OA\OA.Model\bin\Debug\EntityFramework.dll
+G:\C#NET\OA\OA.Model\bin\Debug\EntityFramework.SqlServer.dll
+G:\C#NET\OA\OA.Model\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+G:\C#NET\OA\OA.Model\bin\Debug\EntityFramework.xml
+G:\C#NET\OA\OA.Model\bin\Debug\EntityFramework.SqlServer.xml
+G:\C#NET\OA\OA.Model\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+G:\C#NET\OA\OA.Model\bin\Debug\zh-Hans\EntityFramework.resources.dll
+G:\C#NET\OA\OA.Model\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+G:\C#NET\OA\OA.Model\obj\Debug\OA.Model.csproj.CoreCompileInputs.cache
+G:\C#NET\OA\OA.Model\obj\Debug\OA.Model.dll
+G:\C#NET\OA\OA.Model\obj\Debug\OA.Model.pdb
+G:\C#NET\OA\OA.Model\obj\Debug\OA.Model.csprojResolveAssemblyReference.cache

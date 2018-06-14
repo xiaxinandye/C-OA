@@ -1,0 +1,13 @@
+﻿正在安装程序集“G:\C#NET\OA\OA.WindowsService\bin\Debug\OA.WindowsService.exe”。
+受影响的参数是:
+   logtoconsole = 
+   logfile = G:\C#NET\OA\OA.WindowsService\bin\Debug\OA.WindowsService.InstallLog
+   assemblypath = G:\C#NET\OA\OA.WindowsService\bin\Debug\OA.WindowsService.exe
+正在安装服务 OA.QuartzStasticsJob...
+已成功安装服务 OA.QuartzStasticsJob。
+正在日志 Application 中创建 EventLog 源 OA.QuartzStasticsJob...
+正在提交程序集“G:\C#NET\OA\OA.WindowsService\bin\Debug\OA.WindowsService.exe”。
+受影响的参数是:
+   logtoconsole = 
+   logfile = G:\C#NET\OA\OA.WindowsService\bin\Debug\OA.WindowsService.InstallLog
+   assemblypath = G:\C#NET\OA\OA.WindowsService\bin\Debug\OA.WindowsService.exe

@@ -1,0 +1,17 @@
+G:\C#NET\OA\OA.IDAL\obj\Debug\OA.IDAL.csprojResolveAssemblyReference.cache
+G:\C#NET\OA\OA.IDAL\obj\Debug\OA.IDAL.csproj.CoreCompileInputs.cache
+G:\C#NET\OA\OA.IDAL\bin\Debug\OA.IDAL.dll
+G:\C#NET\OA\OA.IDAL\bin\Debug\OA.IDAL.pdb
+G:\C#NET\OA\OA.IDAL\bin\Debug\OA.Model.dll
+G:\C#NET\OA\OA.IDAL\bin\Debug\EntityFramework.dll
+G:\C#NET\OA\OA.IDAL\bin\Debug\OA.Model.pdb
+G:\C#NET\OA\OA.IDAL\bin\Debug\OA.Model.dll.config
+G:\C#NET\OA\OA.IDAL\bin\Debug\EntityFramework.xml
+G:\C#NET\OA\OA.IDAL\obj\Debug\OA.IDAL.dll
+G:\C#NET\OA\OA.IDAL\obj\Debug\OA.IDAL.pdb
+G:\C#NET\OA\OA.IDAL\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+G:\C#NET\OA\OA.IDAL\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+G:\C#NET\OA\OA.IDAL\bin\Debug\OA.IDAL.dll.config
+G:\C#NET\OA\OA.IDAL\bin\Debug\EntityFramework.SqlServer.dll
+G:\C#NET\OA\OA.IDAL\bin\Debug\EntityFramework.SqlServer.xml
+G:\C#NET\OA\OA.IDAL\bin\Debug\Newtonsoft.Json.dll

@@ -1,0 +1,17 @@
+G:\C#NET\OA\OA.IBLL\bin\Debug\OA.IBLL.dll
+G:\C#NET\OA\OA.IBLL\bin\Debug\OA.IBLL.pdb
+G:\C#NET\OA\OA.IBLL\obj\Debug\OA.IBLL.csproj.CoreCompileInputs.cache
+G:\C#NET\OA\OA.IBLL\obj\Debug\OA.IBLL.dll
+G:\C#NET\OA\OA.IBLL\obj\Debug\OA.IBLL.pdb
+G:\C#NET\OA\OA.IBLL\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+G:\C#NET\OA\OA.IBLL\bin\Debug\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+G:\C#NET\OA\OA.IBLL\obj\Debug\OA.IBLL.csprojResolveAssemblyReference.cache
+G:\C#NET\OA\OA.IBLL\bin\Debug\OA.IDAL.dll
+G:\C#NET\OA\OA.IBLL\bin\Debug\OA.Model.dll
+G:\C#NET\OA\OA.IBLL\bin\Debug\EntityFramework.dll
+G:\C#NET\OA\OA.IBLL\bin\Debug\OA.IDAL.pdb
+G:\C#NET\OA\OA.IBLL\bin\Debug\OA.IDAL.dll.config
+G:\C#NET\OA\OA.IBLL\bin\Debug\OA.Model.pdb
+G:\C#NET\OA\OA.IBLL\bin\Debug\OA.Model.dll.config
+G:\C#NET\OA\OA.IBLL\bin\Debug\EntityFramework.xml
+G:\C#NET\OA\OA.IBLL\bin\Debug\Newtonsoft.Json.dll

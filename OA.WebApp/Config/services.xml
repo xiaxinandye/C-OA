@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects>
+  <object name="UserInfoService" type="OA.BLL.UserInfoService,OA.BLL">
+  </object>
+  <object name="RoleInfoService" type="OA.BLL.RoleInfoService,OA.BLL">
+  </object>
+  <object name="R_UserInfo_ActionInfoService" type="OA.BLL.R_UserInfo_ActionInfoService,OA.BLL">
+  </object>
+  <object name="ActionInfoService" type="OA.BLL.ActionInfoService,OA.BLL">
+  </object>
+  <object name="BooksService" type="OA.BLL.BooksService,OA.BLL">
+  </object>
+  <object name="T_SearchLogStasticsService" type="OA.BLL.T_SearchLogStasticsService,OA.BLL">
+  </object>
+  <object name="T_SearchLogsService" type="OA.BLL.T_SearchLogsService,OA.BLL">
+  </object>
+</objects>
